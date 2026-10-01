@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>TEQVORA Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">TEQVORA<span>.</span></div>
+        <nav class="sidebar-nav">
+            <button class="nav-item is-active" data-view="overview">Overview</button>
+            <button class="nav-item" data-view="analytics">Analytics</button>
+            <button class="nav-item" data-view="submissions">Submissions</button>
+        </nav>
+        <button class="nav-item nav-logout" id="logoutButton">Log out</button>
+    </aside>
+
+    <div class="main">
+        <header class="topbar">
+            <button class="menu-button" id="menuButton" aria-label="Toggle menu">&#9776;</button>
+            <h2 id="viewTitle">Overview</h2>
+            <span class="topbar-user" id="userName"></span>
+        </header>
+
+        <p class="page-error" id="pageError" hidden></p>
+
+        <!-- OVERVIEW -->
+        <section class="view is-active" id="view-overview">
+            <div class="stat-grid" id="statGrid"></div>
+            <div class="two-col">
+                <div class="panel">
+                    <h3>Recent inquiries</h3>
+                    <ul class="list" id="recentInquiries"></ul>
+                </div>
+                <div class="panel">
+                    <h3>Recent activity</h3>
+                    <ul class="list" id="recentActivity"></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ANALYTICS -->
+        <section class="view" id="view-analytics">
+            <div class="panel">
+                <div class="panel-head">
+                    <h3>Traffic</h3>
+                    <select id="daysSelect">
+                        <option value="7">Last 7 days</option>
+                        <option value="30" selected>Last 30 days</option>
+                        <option value="90">Last 90 days</option>
+                    </select>
+                </div>
+                <div class="chart-box"><canvas id="trafficChart"></canvas></div>
+            </div>
+            <div class="three-col">
+                <div class="panel"><h3>Top pages</h3><ul class="list" id="topPages"></ul></div>
+                <div class="panel"><h3>Referrers</h3><ul class="list" id="referrers"></ul></div>
+                <div class="panel"><h3>Devices</h3><ul class="list" id="devices"></ul></div>
+                <div class="panel"><h3>Browsers</h3><ul class="list" id="browsers"></ul></div>
+                <div class="panel"><h3>Operating systems</h3><ul class="list" id="operatingSystems"></ul></div>
+            </div>
+        </section>
+
+        <!-- SUBMISSIONS -->
+        <section class="view" id="view-submissions">
+            <div class="panel">
+                <div class="filters">
+                    <input type="search" id="searchInput" placeholder="Search name, email or subject">
+                    <select id="statusFilter">
+                        <option value="">All statuses</option>
+                        <option value="new">New</option>
+                        <option value="read">Read</option>
+                        <option value="replied">Replied</option>
+                    </select>
+                    <select id="serviceFilter"><option value="">All services</option></select>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Name</th><th>Email</th><th>Service</th><th>Date</th><th>Status</th></tr>
+                        </thead>
+                        <tbody id="submissionRows"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button class="button button-light" id="prevPage">Previous</button>
+                    <span id="pageInfo"></span>
+                    <button class="button button-light" id="nextPage">Next</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Submission detail -->
+    <div class="modal" id="submissionModal" hidden>
+        <div class="modal-card">
+            <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+            <h3 id="modalName"></h3>
+            <dl id="modalDetails"></dl>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

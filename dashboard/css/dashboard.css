@@ -1,0 +1,473 @@
+/* Dashboard styles - uses the same tokens as final.css on the public site */
+
+:root {
+    --color-primary: #FF4D00;
+    --color-primary-dark: #E64400;
+    --color-navy: #172033;
+    --color-text: #172033;
+    --color-text-muted: #7A8496;
+    --color-bg: #F7F8FA;
+    --color-white: #FFFFFF;
+    --color-border: #E4E7EC;
+    --color-green: #1FA774;
+    --color-blue: #4F7CFF;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --shadow-soft: 0 8px 30px rgba(23, 32, 51, 0.06);
+    --sidebar-width: 240px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text);
+    background: var(--color-bg);
+}
+
+h1, h2, h3, .sidebar-brand {
+    font-family: 'Manrope', 'Inter', sans-serif;
+}
+
+/* ---------- Buttons & fields ---------- */
+
+.button {
+    padding: 12px 20px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: var(--color-primary-dark);
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button-light {
+    background: var(--color-white);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.button-light:hover {
+    background: var(--color-bg);
+}
+
+input,
+select {
+    padding: 11px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-white);
+    color: var(--color-text);
+    font: inherit;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+/* ---------- Login ---------- */
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 32px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+}
+
+.login-card h1 span {
+    color: var(--color-primary);
+}
+
+.login-subtitle {
+    margin: 6px 0 24px;
+    color: var(--color-text-muted);
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.field input {
+    width: 100%;
+}
+
+.login-card .button {
+    width: 100%;
+}
+
+.login-error,
+.page-error {
+    margin-top: 12px;
+    color: #C0392B;
+    font-size: 14px;
+}
+
+/* ---------- Layout ---------- */
+
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-width);
+    padding: 24px 16px;
+    background: var(--color-navy);
+    transition: transform 0.25s;
+}
+
+.sidebar-brand {
+    padding: 0 12px 24px;
+    color: var(--color-white);
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.sidebar-brand span {
+    color: var(--color-primary);
+}
+
+.sidebar-nav {
+    flex: 1;
+}
+
+.nav-item {
+    display: block;
+    width: 100%;
+    margin-bottom: 4px;
+    padding: 12px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: #C8CEDA;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-item.is-active {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.main {
+    margin-left: var(--sidebar-width);
+    padding: 0 32px 40px;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 0;
+}
+
+.topbar h2 {
+    flex: 1;
+}
+
+.topbar-user {
+    color: var(--color-text-muted);
+    font-size: 14px;
+}
+
+.menu-button {
+    display: none;
+    padding: 6px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-white);
+    font-size: 18px;
+}
+
+.view {
+    display: none;
+}
+
+.view.is-active {
+    display: block;
+}
+
+/* ---------- Cards & grids ---------- */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat,
+.panel {
+    padding: 20px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+}
+
+.stat span {
+    color: var(--color-text-muted);
+    font-size: 13px;
+}
+
+.stat strong {
+    display: block;
+    margin-top: 6px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 30px;
+}
+
+.two-col,
+.three-col {
+    display: grid;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.two-col {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.three-col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.panel h3 {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chart-box {
+    height: 300px;
+}
+
+.list {
+    padding: 0;
+    list-style: none;
+}
+
+.list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 14px;
+}
+
+.list li:last-child {
+    border-bottom: 0;
+}
+
+.list small,
+.empty {
+    color: var(--color-text-muted);
+}
+
+.empty {
+    padding: 16px 0;
+    text-align: center;
+}
+
+/* ---------- Submissions table ---------- */
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.filters input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    white-space: nowrap;
+}
+
+th {
+    color: var(--color-text-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+tbody tr[data-id] {
+    cursor: pointer;
+}
+
+tbody tr[data-id]:hover {
+    background: var(--color-bg);
+}
+
+.badge {
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.badge-new {
+    background: rgba(255, 77, 0, 0.12);
+    color: var(--color-primary-dark);
+}
+
+.badge-read {
+    background: rgba(79, 124, 255, 0.12);
+    color: var(--color-blue);
+}
+
+.badge-replied {
+    background: rgba(31, 167, 116, 0.12);
+    color: var(--color-green);
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+/* ---------- Modal ---------- */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(23, 32, 51, 0.6);
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal-card {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    padding: 28px;
+    overflow: auto;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    border: 0;
+    background: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.modal-card dt {
+    margin-top: 14px;
+    color: var(--color-text-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.modal-card dd {
+    margin: 4px 0 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 991px) {
+    .three-col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.is-open {
+        transform: none;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 0 20px 32px;
+    }
+
+    .menu-button {
+        display: block;
+    }
+}
+
+@media (max-width: 767px) {
+    .two-col,
+    .three-col {
+        grid-template-columns: 1fr;
+    }
+}
