@@ -247,49 +247,68 @@ app.use(
 );
 
 /* =========================
-   SERVER PORT
+   VERCEL / SERVERLESS
 ========================= */
 
-const port =
-    process.env.PORT || 5000;
+let dbPromise;
 
-/* =========================
-   START SERVER
-========================= */
+async function ensureDB() {
+    if (!dbPromise) {
+        dbPromise = connectDB();
+    }
 
-connectDB()
-    .then(() => {
+    return dbPromise;
+}
 
-        app.listen(
-            port,
-            () => {
+if (process.env.VERCEL) {
 
-                console.log(
-                    `Server running on port ${port}`
+    module.exports = async (req, res) => {
+        await ensureDB();
+        return app(req, res);
+    };
+
+} else {
+
+    /* =========================
+       LOCAL DEVELOPMENT
+    ========================= */
+
+    const port = process.env.PORT || 5000;
+
+    connectDB()
+        .then(() => {
+
+            app.listen(
+                port,
+                () => {
+
+                    console.log(
+                        `Server running on port ${port}`
+                    );
+
+                    console.log(
+                        'Allowed CORS origins:'
+                    );
+
+                    allowedOrigins.forEach(
+                        (origin) => {
+                            console.log(
+                                `- ${origin}`
+                            );
+                        }
+                    );
+                }
+            );
+        })
+        .catch(
+            (error) => {
+
+                console.error(
+                    'Startup failed:',
+                    error.message
                 );
 
-                console.log(
-                    'Allowed CORS origins:'
-                );
-
-                allowedOrigins.forEach(
-                    (origin) => {
-                        console.log(
-                            `- ${origin}`
-                        );
-                    }
-                );
+                process.exit(1);
             }
         );
-    })
-    .catch(
-        (error) => {
-
-            console.error(
-                'Startup failed:',
-                error.message
-            );
-
-            process.exit(1);
-        }
-    );
+}
